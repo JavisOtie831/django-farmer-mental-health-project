@@ -1,0 +1,41 @@
+{% extends "accounts/base.html" %}
+{% block title %}User Details{% endblock %}
+{% block header_title %}User Details{% endblock %}
+
+{% block content %}
+<div class="afya-card" style="max-width: 700px;">
+    <div style="display: flex; align-items: center; gap: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 20px;">
+        <div style="width: 60px; height: 60px; background: #10b981; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">
+            {{ user_obj.username|first|upper }}
+        </div>
+        <div>
+            <h2 style="margin: 0; color: #1e293b;">{{ user_obj.username }}</h2>
+            <p style="margin: 5px 0 0 0; color: #64748b;">{{ user_obj.email|default:"No email provided" }}</p>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+        <div>
+            <label>First Name</label>
+            <p style="margin: 0; color: #1e293b; font-weight: 500;">{{ user_obj.first_name|default:"-" }}</p>
+        </div>
+        <div>
+            <label>Last Name</label>
+            <p style="margin: 0; color: #1e293b; font-weight: 500;">{{ user_obj.last_name|default:"-" }}</p>
+        </div>
+        <div>
+            <label>Date Joined</label>
+            <p style="margin: 0; color: #1e293b; font-weight: 500;">{{ user_obj.date_joined|date:"M d, Y" }}</p>
+        </div>
+        <div>
+            <label>Last Login</label>
+            <p style="margin: 0; color: #1e293b; font-weight: 500;">{{ user_obj.last_login|date:"M d, Y H:i"|default:"Never" }}</p>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+        <a href="{% url 'accounts:user_edit' user_obj.pk %}" class="afya-btn">Edit User</a>
+        <a href="{% url 'accounts:user_list' %}" class="afya-btn afya-btn-outline">Back to List</a>
+    </div>
+</div>
+{% endblock %}

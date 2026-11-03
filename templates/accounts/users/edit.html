@@ -1,0 +1,29 @@
+{% extends "accounts/base.html" %}
+{% block title %}Edit User{% endblock %}
+{% block header_title %}Edit User: {{ object.username }}{% endblock %}
+
+{% block content %}
+<div class="afya-card" style="max-width: 600px;">
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="display: block; color: #64748b; font-size: 12px; margin-top: -10px; margin-bottom: 15px;">{{ field.help_text }}</small>
+                {% endif %}
+                {% if field.errors %}
+                    <div style="color: #ef4444; font-size: 12px; margin-top: -10px; margin-bottom: 15px;">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button type="submit" class="afya-btn">Update User</button>
+            <a href="{% url 'accounts:user_list' %}" class="afya-btn afya-btn-outline">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

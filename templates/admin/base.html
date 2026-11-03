@@ -1,0 +1,144 @@
+{% load i18n static %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}">
+    {% block dark-mode-vars %}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/dark_mode.css" %}">
+    <script src="{% static "admin/js/theme.js" %}"></script>
+    {% endblock %}
+    {% block extrahead %}{% endblock %}
+    {% block responsive %}
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}">
+    {% endblock %}
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+
+    <style>
+        body { margin: 0 !important; padding: 0 !important; background: #f4f7f6 !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; overflow-x: hidden !important; }
+        #container { margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: none !important; }
+        .afya-header { background: #1f7a4d !important; color: #fff !important; padding: 0 24px !important; height: 64px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important; position: relative !important; z-index: 1000 !important; }
+        .afya-header-left { display: flex !important; align-items: center !important; gap: 16px !important; }
+        .afya-toggle-btn { background: rgba(255, 255, 255, 0.15) !important; border: none !important; color: #fff !important; width: 38px !important; height: 38px !important; border-radius: 8px !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; transition: background 0.2s !important; }
+        #branding h1, #branding h1 a:link { color: #fff !important; font-size: 20px !important; font-weight: 700 !important; text-decoration: none !important; margin: 0 !important; }
+        .afya-topbar { display: flex !important; align-items: center !important; gap: 16px !important; }
+        .afya-welcome { font-size: 13px !important; color: rgba(255, 255, 255, 0.9) !important; }
+        .afya-logout-btn { background: rgba(0, 0, 0, 0.2) !important; border: 1px solid rgba(255, 255, 255, 0.3) !important; color: #fff !important; padding: 6px 14px !important; border-radius: 6px !important; cursor: pointer !important; font-weight: 600 !important; font-size: 13px !important; }
+
+        .afya-layout-wrapper { display: flex !important; flex-wrap: nowrap !important; min-height: calc(100vh - 64px) !important; width: 100% !important; }
+        .afya-sidebar { width: 280px !important; flex-shrink: 0 !important; background: #1e293b !important; color: #e2e8f0 !important; padding: 24px 16px !important; height: calc(100vh - 64px) !important; position: sticky !important; top: 64px !important; overflow-y: auto !important; overflow-x: hidden !important; box-sizing: border-box !important; transition: width 0.3s ease, padding 0.3s ease, opacity 0.3s ease !important; }
+        .afya-layout-wrapper.sidebar-collapsed .afya-sidebar { width: 0 !important; padding-left: 0 !important; padding-right: 0 !important; opacity: 0; }
+        .afya-sidebar-title { font-size: 11px !important; text-transform: uppercase !important; letter-spacing: 1.5px !important; color: #94a3b8 !important; margin: 0 0 16px 8px !important; font-weight: 700 !important; }
+        .afya-nav-list { display: flex !important; flex-direction: column !important; gap: 6px !important; }
+        .afya-app-btn { display: flex !important; align-items: center !important; gap: 12px !important; padding: 12px 16px !important; color: #cbd5e1 !important; text-decoration: none !important; font-size: 14px !important; font-weight: 600 !important; border-radius: 8px !important; transition: all 0.2s ease !important; background: rgba(255, 255, 255, 0.02) !important; border-left: 3px solid transparent !important; }
+        .afya-app-btn svg { width: 18px !important; height: 18px !important; opacity: 0.7 !important; transition: opacity 0.2s !important; }
+        .afya-app-btn:hover { background: rgba(255, 255, 255, 0.08) !important; color: #fff !important; }
+        .afya-app-btn:hover svg { opacity: 1 !important; }
+        .afya-app-btn.active { background: rgba(16, 185, 129, 0.15) !important; color: #34d399 !important; border-left: 3px solid #10b981 !important; }
+        .afya-app-btn.active svg { opacity: 1 !important; color: #34d399 !important; }
+
+        #content { flex-grow: 1 !important; padding: 32px !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; background: #f4f7f6 !important; }
+        .action-checkbox, .action-checkbox-column, #changelist .actions { display: none !important; }
+
+        body[class*="app-"]:not(.change-list):not(.dashboard):not(.login) .module { background: transparent !important; box-shadow: none !important; border: none !important; margin-bottom: 30px !important; }
+        body[class*="app-"]:not(.change-list):not(.dashboard):not(.login) .module caption, body[class*="app-"]:not(.change-list):not(.dashboard):not(.login) .module h2 { background: transparent !important; color: #111827 !important; border-bottom: 2px solid #1f7a4d !important; padding: 10px 0 !important; font-size: 20px !important; font-weight: 700 !important; text-align: left !important; margin-bottom: 10px !important; }
+        body[class*="app-"]:not(.change-list):not(.dashboard):not(.login) .module th, body[class*="app-"]:not(.change-list):not(.dashboard):not(.login) .module td { background: #ffffff !important; color: #1e293b !important; border-bottom: 1px solid #e2e8f0 !important; padding: 12px 16px !important; display: table-cell !important; }
+        body[class*="app-"]:not(.change-list):not(.dashboard):not(.login) .module th a { color: #1e293b !important; font-size: 15px !important; font-weight: 600 !important; text-transform: none !important; }
+        body[class*="app-"]:not(.change-list):not(.dashboard):not(.login) .module th a:hover { color: #10b981 !important; }
+
+        #content h1 { font-size: 24px !important; font-weight: 600 !important; color: #145c38 !important; margin-bottom: 24px !important; }
+        .dashboard .module { background: #fff !important; border-radius: 12px !important; border: none !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important; overflow: hidden !important; margin-bottom: 24px !important; }
+        .dashboard .module caption, .dashboard .module h2, .dashboard .module th { background: #1f7a4d !important; color: #fff !important; padding: 14px 20px !important; font-size: 13px !important; font-weight: 600 !important; text-transform: uppercase !important; }
+        .dashboard .module td { padding: 12px 20px !important; border-bottom: 1px solid #f0f0f0 !important; font-size: 14px !important; }
+        .dashboard .module tr:hover { background: #eaf5ee !important; }
+        .dashboard .module a { color: #145c38 !important; font-weight: 500 !important; text-decoration: none !important; }
+        .object-tools a { background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important; color: #fff !important; padding: 10px 20px !important; border-radius: 8px !important; font-weight: 600 !important; text-decoration: none !important; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important; float: right !important; }
+        #toolbar { background: #fff !important; padding: 16px 20px !important; border-radius: 12px 12px 0 0 !important; border-bottom: 1px solid #e2e8f0 !important; display: flex !important; align-items: center !important; gap: 10px !important; }
+        #toolbar form { display: flex !important; gap: 10px !important; width: 100% !important; margin: 0 !important; }
+        #searchbar { width: 300px !important; padding: 10px 14px !important; border: 1px solid #d1d5db !important; border-radius: 8px !important; }
+        #toolbar input[type=submit] { padding: 10px 20px !important; background: #1f7a4d !important; border: none !important; border-radius: 8px !important; color: #fff !important; cursor: pointer !important; }
+        #result_list { width: 100% !important; border: none !important; background: #fff !important; border-radius: 0 0 12px 12px !important; }
+        #result_list thead th { background: #eaf5ee !important; color: #145c38 !important; padding: 14px 12px !important; border-bottom: 2px solid #1f7a4d !important; }
+        #result_list tbody tr:hover { background: #f0fdf4 !important; }
+        #result_list tbody td { padding: 12px !important; border-bottom: 1px solid #e2e8f0 !important; }
+        .submit-row { background: transparent !important; border: none !important; padding: 20px 0 !important; display: flex !important; justify-content: flex-end !important; gap: 10px !important; }
+        .button, input[type=submit], input[type=button], a.button { background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important; color: #fff !important; border: none !important; border-radius: 8px !important; padding: 10px 20px !important; font-weight: 600 !important; cursor: pointer !important; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important; }
+        .submit-row a.deletelink { background: #ef4444 !important; color: #fff !important; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important; border-radius: 8px !important; padding: 10px 20px !important; font-weight: 600 !important; text-decoration: none !important; display: inline-flex !important; }
+        input[type=text], input[type=password], input[type=email], textarea, select, .vTextField { padding: 10px 14px !important; border: 1px solid #d1d5db !important; border-radius: 8px !important; width: 100% !important; max-width: 500px !important; }
+    </style>
+</head>
+<body class="{% block bodyclass %}{% if not is_popup %}{% block bodyclass_base %}{% endblock %}{% endif %}{% endblock %}" data-admin-utc-offset="{% now "Z" %}">
+    <div id="container">
+        {% if not is_popup %}
+            {% block header %}
+                <header class="afya-header">
+                    <div class="afya-header-left">
+                        <button class="afya-toggle-btn" onclick="document.querySelector('.afya-sidebar').classList.toggle('collapsed'); document.querySelector('.afya-layout-wrapper').classList.toggle('sidebar-collapsed');">
+                            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg>
+                        </button>
+                        <div id="branding">
+                            {% block branding %}{% endblock %}
+                        </div>
+                    </div>
+                    {% block usertools %}
+                        {% if has_permission %}
+                            <div id="user-tools">
+                                {% block welcome-msg %}{% endblock %}
+                                {% block userlinks %}{% endblock %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                </header>
+            {% endblock %}
+            {% block breadcrumbs %}
+                <div class="breadcrumbs" style="padding: 12px 24px; background: #145c38; color: #fff; font-size: 13px;">
+                    <a href="{% url 'admin:index' %}" style="color: #a7f3d0; text-decoration: none;">Home</a>
+                    {% if title %} &rsaquo; {{ title }}{% endif %}
+                </div>
+            {% endblock %}
+        {% endif %}
+
+        <div class="afya-layout-wrapper">
+            {% if not is_popup %}
+                <aside class="afya-sidebar">
+                    <div class="afya-sidebar-title">Main Menu</div>
+                    <div class="afya-nav-list">
+                        {% for app in available_apps %}
+                            <a href="{{ app.app_url }}" class="afya-app-btn {% if app.app_url in request.path %}active{% endif %}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="14" width="7" height="7"></rect>
+                                    <rect x="3" y="14" width="7" height="7"></rect>
+                                </svg>
+                                {{ app.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </aside>
+            {% endif %}
+            <main id="content" class="{% block coltype %}colM{% endblock %}">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+        {% block footer %}<div id="footer"></div>{% endblock %}
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('th a').forEach(function(el) {
+                let text = el.innerText.trim();
+                if (text.endsWith('ss')) { el.innerText = text.slice(0, -1); }
+            });
+            document.querySelectorAll('.afya-app-btn').forEach(function(el) {
+                let text = el.innerText.trim();
+                if (text.endsWith('ss')) { el.innerText = text.slice(0, -1); }
+            });
+        });
+    </script>
+</body>
+</html>

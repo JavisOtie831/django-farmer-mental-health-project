@@ -1,0 +1,47 @@
+{% extends "accounts/base.html" %}
+{% block title %}Users List{% endblock %}
+{% block header_title %}Manage Users{% endblock %}
+
+{% block content %}
+<div class="afya-card">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+        <form method="get" style="display: flex; gap: 10px;">
+            <input type="text" name="q" placeholder="Search users..." class="afya-input" style="margin: 0; width: 300px;">
+            <button type="submit" class="afya-btn afya-btn-outline">Search</button>
+        </form>
+        <a href="{% url 'accounts:user_create' %}" class="afya-btn">+ Add New User</a>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr style="border-bottom: 2px solid #e2e8f0; color: #475569; font-size: 13px;">
+                <th style="padding: 12px;">Username</th>
+                <th style="padding: 12px;">Email</th>
+                <th style="padding: 12px;">Status</th>
+                <th style="padding: 12px; text-align: right;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 16px 12px; font-weight: 600; color: #1e293b;">{{ u.username }}</td>
+                <td style="padding: 16px 12px; color: #64748b;">{{ u.email|default:"-" }}</td>
+                <td style="padding: 16px 12px;">
+                    {% if u.is_active %}
+                        <span style="background: #d1fae5; color: #065f46; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">Active</span>
+                    {% else %}
+                        <span style="background: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">Inactive</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 16px 12px; text-align: right;">
+                    <a href="{% url 'accounts:user_detail' u.pk %}" style="color: #3b82f6; text-decoration: none; font-weight: 600; margin-right: 15px;">View</a>
+                    <a href="{% url 'accounts:user_edit' u.pk %}" style="color: #d97706; text-decoration: none; font-weight: 600;">Edit</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" style="padding: 20px; text-align: center; color: #64748b;">No users found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}{{ title }} | AfyaShamba{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'admin/css/afyashamba.css' %}">
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">🌱 AfyaShamba</a></h1>
+{% endblock %}
+
+{% block welcome-msg %}{% endblock %}
+
+{% block userlinks %}
+    <div class="afya-topbar">
+        <span class="afya-welcome">Welcome, <strong>{{ request.user.username }}</strong>.</span>
+        <form method="post" action="{% url 'admin:logout' %}" style="margin: 0;">
+            {% csrf_token %}
+            <button type="submit" class="afya-logout-btn">Log out</button>
+        </form>
+    </div>
+{% endblock %}

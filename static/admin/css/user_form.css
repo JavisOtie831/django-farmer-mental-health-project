@@ -1,0 +1,47 @@
+.custom-user-form .form-row {
+    border-bottom: none !important;
+    padding: 12px 0 !important;
+}
+
+.custom-user-form label {
+    font-size: 13px !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 4px !important;
+    display: block !important;
+}
+
+.custom-user-form input[type="text"],
+.custom-user-form input[type="password"],
+.custom-user-form input[type="email"],
+.custom-user-form select,
+.custom-user-form textarea {
+    width: 100% !important;
+    max-width: 500px !important;
+    padding: 12px 16px !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    background: #f8fafc !important;
+    color: #1e293b !important;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+}
+
+.custom-user-form input:focus,
+.custom-user-form select:focus,
+.custom-user-form textarea:focus {
+    background: #ffffff !important;
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+    outline: none !important;
+}
+
+.custom-user-form .help {
+    font-size: 12px !important;
+    color: #64748b !important;
+    margin-top: 6px !important;
+    line-height: 1.4 !important;
+}

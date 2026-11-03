@@ -1,0 +1,475 @@
+/* ============================================================
+   AfyaShamba — Complete Global Admin Theme
+   ============================================================ */
+
+:root {
+    --afya-primary: #1f7a4d;
+    --afya-primary-dark: #145c38;
+    --afya-primary-light: #eaf5ee;
+    --afya-accent: #10b981;
+    --afya-bg: #f4f7f6;
+    --afya-text: #1a1a1a;
+    --afya-sidebar-bg: #1e293b;
+}
+
+/* ---------- Base Body ---------- */
+body {
+    background: var(--afya-bg) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ---------- Header (Fixes Overlap) ---------- */
+.afya-header, #header {
+    background: var(--afya-primary) !important;
+    color: #fff !important;
+    padding: 16px 32px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+}
+
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: #fff !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    margin: 0 !important;
+}
+
+#user-tools {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.afya-topbar {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+}
+
+.afya-welcome {
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.afya-logout-btn {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #fff !important;
+    padding: 6px 14px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    transition: background 0.2s !important;
+}
+.afya-logout-btn:hover {
+    background: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ---------- Layout Wrapper ---------- */
+.afya-layout-wrapper {
+    display: flex !important;
+    min-height: calc(100vh - 68px) !important;
+}
+
+/* ---------- Sidebar & Dropdowns ---------- */
+.afya-sidebar {
+    width: 260px !important;
+    flex-shrink: 0 !important;
+    background: var(--afya-sidebar-bg) !important;
+    color: #e2e8f0 !important;
+    padding: 24px 0 !important;
+    height: calc(100vh - 68px) !important;
+    position: sticky !important;
+    top: 68px !important;
+    overflow-y: auto !important;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1) !important;
+}
+
+.afya-sidebar-title {
+    padding: 0 20px 16px !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    color: #94a3b8 !important;
+    border-bottom: 1px solid #334155 !important;
+    margin-bottom: 16px !important;
+    font-weight: 700 !important;
+}
+
+.afya-nav-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+}
+
+.afya-nav-app {
+    margin-bottom: 0 !important;
+}
+
+/* Clickable Parent Menu Item */
+.afya-app-title {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 20px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #f8fafc !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    transition: background 0.2s, color 0.2s !important;
+    list-style: none !important;
+}
+
+/* Hide default HTML5 triangle */
+.afya-app-title::-webkit-details-marker {
+    display: none !important;
+}
+
+.afya-app-title:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.afya-chevron {
+    transition: transform 0.3s ease !important;
+    color: #94a3b8 !important;
+}
+
+details[open] .afya-chevron {
+    transform: rotate(180deg) !important;
+    color: #34d399 !important;
+}
+
+details[open] .afya-app-title {
+    color: #34d399 !important;
+}
+
+/* Child Menu List & Animation */
+.afya-nav-models {
+    list-style: none !important;
+    padding: 4px 0 8px 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    animation: slideDown 0.25s ease-out forwards !important;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.afya-nav-model a, .afya-nav-model span {
+    display: block !important;
+    padding: 8px 20px 8px 32px !important;
+    color: #cbd5e1 !important;
+    text-decoration: none !important;
+    font-size: 13.5px !important;
+    transition: all 0.15s ease !important;
+    border-left: 3px solid transparent !important;
+    position: relative !important;
+}
+
+/* Child Menu Dot */
+.afya-nav-model a::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #64748b;
+    transition: background 0.2s;
+}
+
+.afya-nav-model a:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #fff !important;
+}
+.afya-nav-model a:hover::before {
+    background: #fff;
+}
+
+.afya-nav-model.active a {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #34d399 !important;
+    font-weight: 600 !important;
+    border-left: 3px solid #10b981 !important;
+}
+.afya-nav-model.active a::before {
+    background: #34d399;
+    box-shadow: 0 0 6px #34d399;
+}
+
+/* ---------- Main Content Area ---------- */
+#content {
+    flex-grow: 1 !important;
+    padding: 32px 40px !important;
+    margin: 0 !important;
+    max-width: none !important;
+    background: var(--afya-bg) !important;
+    overflow: visible !important;
+}
+
+#content h1 {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    color: var(--afya-primary-dark) !important;
+    margin-bottom: 24px !important;
+}
+
+/* ---------- Dashboard Cards ---------- */
+.module {
+    background: #fff !important;
+    border-radius: 12px !important;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+    margin-bottom: 24px !important;
+    overflow: hidden !important;
+}
+
+.module caption, .module h2, .module th {
+    background: var(--afya-primary) !important;
+    color: #fff !important;
+    padding: 14px 20px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.module td {
+    padding: 12px 20px !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    font-size: 14px !important;
+}
+.module tr:hover {
+    background: var(--afya-primary-light) !important;
+}
+.module a {
+    color: var(--afya-primary-dark) !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+}
+
+/* ---------- List View: Toolbar, Add Button, Search ---------- */
+#changelist {
+    position: relative !important;
+}
+
+.object-tools {
+    margin-bottom: 20px !important;
+    padding: 0 !important;
+    float: right !important;
+    display: flex !important;
+}
+
+.object-tools a {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: #fff !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+    transition: transform 0.15s !important;
+}
+.object-tools a:hover {
+    transform: translateY(-1px) !important;
+}
+
+#toolbar {
+    background: #fff !important;
+    padding: 16px 20px !important;
+    border-radius: 12px 12px 0 0 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    margin-bottom: 0 !important;
+    display: flex !important;
+    gap: 10px !important;
+    align-items: center !important;
+}
+
+#toolbar form {
+    display: flex !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+#searchbar {
+    width: 300px !important;
+    padding: 10px 14px !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+}
+
+#toolbar input[type=submit] {
+    padding: 10px 20px !important;
+    background: var(--afya-primary) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+}
+
+/* ---------- List View: Actions & Tables ---------- */
+#changelist .actions {
+    background: #f8fafc !important;
+    padding: 12px 20px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+#changelist .actions select {
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    border: 1px solid #d1d5db !important;
+}
+
+#changelist .actions button {
+    background: var(--afya-primary) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+}
+
+#result_list {
+    border: none !important;
+    width: 100% !important;
+}
+
+#result_list thead th {
+    background: var(--afya-primary-light) !important;
+    color: var(--afya-primary-dark) !important;
+    padding: 14px 12px !important;
+    border-bottom: 2px solid var(--afya-primary) !important;
+}
+
+#result_list tbody tr:hover {
+    background: #f0fdf4 !important;
+}
+
+#result_list tbody td {
+    padding: 12px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    font-size: 14px !important;
+}
+
+/* Right Sidebar Filters */
+#changelist-filter {
+    background: #fff !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+    margin-left: 20px !important;
+    border: none !important;
+}
+
+#changelist-filter h2 {
+    background: var(--afya-primary) !important;
+    color: #fff !important;
+    padding: 10px 16px !important;
+    margin: -20px -20px 16px -20px !important;
+    border-radius: 12px 12px 0 0 !important;
+    font-size: 13px !important;
+}
+
+/* ---------- Forms (Change / Add Views) ---------- */
+.form-row {
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 16px 0 !important;
+    overflow: hidden !important;
+}
+
+.form-row label {
+    font-weight: 600 !important;
+    color: #334155 !important;
+    font-size: 14px !important;
+    padding-top: 8px !important;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], textarea, select, .vTextField {
+    padding: 10px 14px !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--afya-accent) !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+    outline: none !important;
+}
+
+/* ---------- Save / Delete Buttons ---------- */
+.submit-row {
+    background: transparent !important;
+    border: none !important;
+    padding: 20px 0 !important;
+    text-align: right !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+    transition: transform 0.15s, box-shadow 0.2s !important;
+}
+
+.button:hover, input[type=submit]:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4) !important;
+}
+
+.submit-row a.deletelink, .deletelink {
+    background: #ef4444 !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+/* ---------- Mobile Responsiveness ---------- */
+@media (max-width: 900px) {
+    .afya-layout-wrapper { flex-direction: column !important; }
+    .afya-sidebar {
+        width: 100% !important;
+        height: auto !important;
+        position: static !important;
+    }
+    #content { padding: 20px !important; }
+}

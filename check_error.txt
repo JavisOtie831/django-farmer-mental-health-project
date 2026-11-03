@@ -1,0 +1,48 @@
+﻿python : Traceback (most recent call last):
+At line:1 char:1
++ python manage.py check 2>&1 | Out-File check_error.txt -Encoding utf8
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Projects\afyashamba\manage.py", line 23, in <module>
+    main()
+    ~~~~^^
+  File "C:\Projects\afyashamba\manage.py", line 19, in main
+    execute_from_command_line(sys.argv)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Projects\afyashamba\venv\Lib\site-packages\django\core\management\__init__.py", line 443, in execute_from_command_line
+    utility.execute()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Projects\afyashamba\venv\Lib\site-packages\django\core\management\__init__.py", line 417, in execute
+    django.setup()
+    ~~~~~~~~~~~~^^
+  File "C:\Projects\afyashamba\venv\Lib\site-packages\django\__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\afyashamba\venv\Lib\site-packages\django\apps\registry.py", line 124, in populate
+    app_config.ready()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Projects\afyashamba\venv\Lib\site-packages\django\contrib\admin\apps.py", line 27, in ready
+    self.module.autodiscover()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Projects\afyashamba\venv\Lib\site-packages\django\contrib\admin\__init__.py", line 56, in autodiscover
+    autodiscover_modules("admin", register_to=site)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\afyashamba\venv\Lib\site-packages\django\utils\module_loading.py", line 58, in autodiscover_modules
+    import_module("%s.%s" % (app_config.name, module_to_search))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\anaconda3\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1406, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1371, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1342, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 938, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 759, in exec_module
+  File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+  File "C:\Projects\afyashamba\accounts\admin.py", line 2, in <module>
+    from .models import (
+    ...<3 lines>...
+    )
+ImportError: cannot import name 'Questionnaires' from 'accounts.models' (C:\Projects\afyashamba\accounts\models.py)
